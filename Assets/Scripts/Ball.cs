@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		paddle = GameObject.FindObjectOfType<Paddle>();
 		// stick ball to the paddle by finding the difference between ball and paddle and setting
 		paddleToBallVector=this.transform.position - paddle.transform.position;
 		print (paddleToBallVector);

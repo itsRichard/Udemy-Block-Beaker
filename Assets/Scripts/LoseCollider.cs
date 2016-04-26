@@ -3,13 +3,18 @@ using System.Collections;
 
 public class LoseCollider : MonoBehaviour {
 
-	public LevelManager LevelManager;
+	private LevelManager LevelManager;
+	
 	void OnCollisionEnter2D (Collision2D collision) {
 		print("Collision");
 	}
 	
+	//When the Lose Collider is triggered...
 	void OnTriggerEnter2D (Collider2D trigger){
-		print("Trigger");
+		// Find the thing to manage levels
+		LevelManager = GameObject.FindObjectOfType<LevelManager>();
+		
+		// .. then, switch the level.  
 		LevelManager.LoadLevel ("Win"); 
 		
 		
