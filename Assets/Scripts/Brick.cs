@@ -4,13 +4,26 @@ using System.Collections;
 public class Brick : MonoBehaviour {
 
 	public Sprite[] hitSprites;
-	
+	//public so we can see it in the inspector and so level manager can have access to it 
+	public static int breakableCount = 0;
+
 	private int timesHit;
 	private LevelManager levelManager;
+	private bool isBreakable;
 
 
 	// Use this for initialization
 	void Start () {
+
+		// this refers to this particular instance 
+		isBreakable = this.tag =="Breakable";
+		//keep track of breakable bricks
+		// as each brick comes into being, add a new brick
+		if (isBreakable){
+			breakableCount++;
+		}
+		print("The number of breakable bricks is: " + breakableCount);
+		
 		timesHit = 0;
 		levelManager = GameObject.FindObjectOfType<LevelManager>();
 	}
@@ -21,7 +34,7 @@ public class Brick : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter2D(Collision2D col){ 
-		bool isBreakable = (this.tag =="Breakable");
+
 		if (isBreakable){
 			HandleHits();
 		}
@@ -31,7 +44,10 @@ public class Brick : MonoBehaviour {
 		timesHit++;	
 		int maxHits = hitSprites.Length + 1;
 		if(timesHit >= maxHits){
+			breakableCount--;
 			Destroy(gameObject);
+			levelManager.BrickDestroyed ();
+
 		} else {
 			LoadSprites();
 		}
