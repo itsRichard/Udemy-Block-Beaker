@@ -15,9 +15,7 @@ public class LoseCollider : MonoBehaviour {
 		LevelManager = GameObject.FindObjectOfType<LevelManager>();
 		
 		// .. then, switch the level.  
-		LevelManager.LoadLevel ("Win"); 
-		
-		
+		LevelManager.LoadLevel ("Loose"); 
 		}
 
 }
