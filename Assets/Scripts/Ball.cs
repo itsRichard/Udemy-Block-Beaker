@@ -22,9 +22,12 @@ public class Ball : MonoBehaviour {
 		}
 		
 		if(Input.GetMouseButtonDown (0)){
-			hasStarted=true;
+			if(!hasStarted)
+			{
+				this.rigidbody2D.velocity = new Vector2 (2f,10f);
+				hasStarted=true;
+			}
 			print ("Mouse button clicked; ball launched");
-			this.rigidbody2D.velocity = new Vector2 (2f,10f);
 		}
 	}
 }
