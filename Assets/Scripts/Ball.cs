@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Ball : MonoBehaviour {
+
 	public Paddle paddle;
 	public bool hasStarted = false;
 	private Vector3 paddleToBallVector;
@@ -12,6 +13,7 @@ public class Ball : MonoBehaviour {
 		// stick ball to the paddle by finding the difference between ball and paddle and setting
 		paddleToBallVector=this.transform.position - paddle.transform.position;
 		print (paddleToBallVector);
+
 	}
 	
 	// Update is called once per frame
@@ -28,6 +30,16 @@ public class Ball : MonoBehaviour {
 				hasStarted=true;
 			}
 			print ("Mouse button clicked; ball launched");
+		}
+	}
+	
+	void OnCollisionEnter2D(Collision2D col){
+		
+		Vector2 tweak = new Vector2 (Random.Range (0f, 0.2f), Random.Range (0f, 0.2f));
+			
+		if (hasStarted){
+			rigidbody2D.velocity += tweak;
+			audio.Play ();
 		}
 	}
 }

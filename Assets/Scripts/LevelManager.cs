@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour {
 		if(Brick.breakableCount<=0){
 			LoadNextLevel ();
 		}
+	
 	}
 
 }
