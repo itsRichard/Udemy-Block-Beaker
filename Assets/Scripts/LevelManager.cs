@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 	
 	public void LoadLevel (string name){
+		
 		Debug.Log ("Load Level Request: " + name);
-		Application.LoadLevel (name);
+		SceneManager.LoadScene (name);
+		//Application.LoadLevel (name);
 		Brick.breakableCount=0;
+
 	}
 	
 	public void QuitRequest(){
@@ -16,7 +20,9 @@ public class LevelManager : MonoBehaviour {
 	
 	public void LoadNextLevel(){
 		Brick.breakableCount=0;
-		Application.LoadLevel (Application.loadedLevel+1);
+		print ("Loading next level:" + SceneManager.GetActiveScene ());
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+		// Application.LoadLevel (Application.loadedLevel+1);
 	}
 	
 	public void BrickDestroyed(){
